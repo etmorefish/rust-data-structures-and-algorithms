@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "basic_data_structures",
+    "demo",
+    ]
