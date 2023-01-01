@@ -1,4 +1,5 @@
 mod stack;
+mod queue;
 fn main() {
     println!("Hello, world!");
 
@@ -9,12 +10,15 @@ fn main() {
     let res = is_valid2(s);
     println!("res2: {}", res);
 
-println!("================================================================");
+    println!("================================================================");
     let res = convert_to_base7(-7);
     println!("base7 : {}", res);
 
 
     // let res = eval_rpn()
+
+    let res = last_remaining(5, 3);
+    println!("last_remaining:  res: {}", res);
 
 }
 
@@ -26,6 +30,7 @@ mod tests{
     fn it_works() {}
 }
 
+// 有效的括号
 fn is_valid(s: String) -> bool {
     // s = "()[]{}"
     let mut stack = vec!['0'];
@@ -48,6 +53,7 @@ fn is_valid(s: String) -> bool {
 
 }
 
+// 有效的括号
 fn is_valid2(s: String) -> bool {
     // s = "()[]{}"
     let mut stack = Vec::new();;
@@ -70,6 +76,7 @@ fn is_valid2(s: String) -> bool {
     stack.is_empty()
 }
 
+// 进制转换
 fn convert_to_base7(mut num: i32) -> String {
     if num == 0 { return "0".to_string()}
     // 用栈来保存余数
@@ -97,6 +104,7 @@ fn convert_to_base7(mut num: i32) -> String {
     base7
 }
 
+// 后缀表达式
 fn eval_rpn(tokens: Vec<String>) -> i32 {
     // 存放数字的栈
     let mut nums = Vec::new();
@@ -124,3 +132,24 @@ fn do_calc(op: &str, a: i32, b: i32) -> i32{
         _ => a -b,
     }
 }
+
+// 剑指 Offer 62. 圆圈中最后剩下的数字
+// 0、1、2、3、4这5个数字组成一个圆圈，从数字0开始每次删除第3个数字，
+// 则删除的前4个数字依次是2、0、4、1，因此最后剩下的数字是3。
+fn last_remaining(n: i32, m: i32) -> i32 {
+    let mut q = Vec::new();
+    for i in 0..n{
+        q.insert(0, i);
+    }
+    while q.len() > 1 {
+        for _ in 0..m-1{
+            let r = q.pop().unwrap();
+            println!("r = {}", r);
+            q.insert(0, r);
+        }
+        let x = q.pop();
+        println!("x: {}", x.unwrap());
+    }
+    q.pop().unwrap()
+}
+
