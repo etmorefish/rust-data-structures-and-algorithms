@@ -1,5 +1,6 @@
 [workspace]
 members = [
     "basic_data_structures",
+    "recursion",
     "demo",
     ]
