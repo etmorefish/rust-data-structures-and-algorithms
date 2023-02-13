@@ -14,7 +14,7 @@ impl<T> Node<T> {
     fn new(elem: T) -> Node<T> {
         Node {
             elem: elem,
-            next: None
+            next: None,
         }
     }
 }
@@ -30,7 +30,7 @@ impl<T: Copy + Debug> LVec<T> {
     fn new() -> Self {
         LVec {
             size: 0,
-            head: None
+            head: None,
         }
     }
 
@@ -55,7 +55,7 @@ impl<T: Copy + Debug> LVec<T> {
             let mut curr = self.head.as_mut().unwrap();
 
             // 找到链表最后一个节点
-            for _i in 0..self.size-1 {
+            for _i in 0..self.size - 1 {
                 curr = curr.next.as_mut().unwrap();
             }
 
@@ -76,18 +76,24 @@ impl<T: Copy + Debug> LVec<T> {
     }
 
     fn insert(&mut self, mut index: usize, elem: T) {
-        if index >= self.size { index = self.size; }
+        if index >= self.size {
+            index = self.size;
+        }
 
         // 分三种情况插入新节点
         let mut node = Node::new(elem);
-        if self.is_empty() { // LVec 为空
+        if self.is_empty() {
+            // LVec 为空
             self.head = Some(Box::new(node));
-        } else if index == 0 { // 插入链表首部
+        } else if index == 0 {
+            // 插入链表首部
             node.next = self.head.take();
             self.head = Some(Box::new(node));
-        } else { // 插入链表中间
+        } else {
+            // 插入链表中间
             let mut curr = self.head.as_mut().unwrap();
-            for _i in 0..index - 1 { // 找到插入位置
+            for _i in 0..index - 1 {
+                // 找到插入位置
                 curr = curr.next.as_mut().unwrap();
             }
             node.next = curr.next.take();
@@ -101,16 +107,19 @@ impl<T: Copy + Debug> LVec<T> {
     }
 
     fn remove(&mut self, index: usize) -> Option<T> {
-        if index >= self.size { return None; }
+        if index >= self.size {
+            return None;
+        }
 
         // 分两种情况删除节点，首节点删除最好处理
         let mut node;
         if 0 == index {
             node = self.head.take().unwrap();
             self.head = node.next.take();
-        } else { // 非首节点需要找到待删除节点，并处理前后链接
+        } else {
+            // 非首节点需要找到待删除节点，并处理前后链接
             let mut curr = self.head.as_mut().unwrap();
-            for _i in 0..index-1 {
+            for _i in 0..index - 1 {
                 curr = curr.next.as_mut().unwrap();
             }
             node = curr.next.take().unwrap();
@@ -132,17 +141,17 @@ impl<T: Copy + Debug> LVec<T> {
 }
 
 #[cfg(test)]
-mod tests{
+mod tests {
     use super::*;
 
     #[test]
-    fn it_works(){
+    fn it_works() {
         let mut lvec: LVec<i32> = LVec::new();
         lvec.push(10);
         lvec.push(11);
         lvec.push(12);
         lvec.push(13);
-        lvec.insert(0,9);
+        lvec.insert(0, 9);
         println!("lvec len: {}", lvec.len());
         lvec.print_lvec();
 

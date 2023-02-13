@@ -1,8 +1,8 @@
 mod deque;
 mod linked_list;
 mod linked_old;
-mod queue;
 mod lvec;
+mod queue;
 mod stack;
 fn main() {
     println!("Hello, world!");
