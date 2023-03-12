@@ -34,7 +34,7 @@ fn dp_rec_show(cashes: &[u32], amount: u32, min_cashes: &mut [u32], used: &mut [
     min_cashes[amount as usize]
 }
 
-fn print_cashes(used: &[u32], mut amount: u32){
+fn print_cashes(used: &[u32], mut amount: u32) {
     while amount > 0 {
         let cur = used[amount as usize];
         println!("¥{cur}");

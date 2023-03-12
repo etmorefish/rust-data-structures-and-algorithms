@@ -31,7 +31,7 @@ fn rec_mc2(cashes: &[u32], amount: u32, min_cashes: &mut [u32]) -> u32 {
 */
 
 mod test {
-    use std::time::{Instant, Duration};
+    use std::time::{Duration, Instant};
 
     use super::*;
 
@@ -49,5 +49,3 @@ mod test {
         println!("Time elapsed in expensive_function() is: {:?}", duration);
     }
 }
-
-
