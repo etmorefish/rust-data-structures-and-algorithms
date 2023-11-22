@@ -33,7 +33,7 @@ fn binary_search2(nums: &[i32], num: i32) -> bool {
         return false;
     }
 
-    let mid: usize = nums.len() >> 1;  // /2
+    let mid: usize = nums.len() >> 1; // /2
     if num == nums[mid] {
         return true; // 基本情况2: 项存在
     } else if num < nums[mid] {
